@@ -14,9 +14,19 @@ int main()
 
 	while (true)
 	{
-		int hp = mem.Read<int>(LocalPlayer + offset::m_iHealth);
-		cout << hp << endl;
-		Sleep(100);
 		
+		int flags = mem.Read<int>(LocalPlayer + offset::m_fFlags);
+		//cout << flags << endl;
+		if (GetAsyncKeyState(0x20))
+		{
+			if (flags == 257 || flags == 263)
+			{
+				keybd_event(MapVirtualKey(0x20,0), 0x39, KEYEVENTF_EXTENDEDKEY, 0);
+				keybd_event(MapVirtualKey(0x20,0), 0x39, KEYEVENTF_KEYUP, 0);
+				Sleep(1);
+			}
+		}
+		
+		Sleep(1);
 	}
 }

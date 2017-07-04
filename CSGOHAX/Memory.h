@@ -24,5 +24,11 @@ public:
 		ReadProcessMemory(hProc, (LPVOID)dwAddress, &ret, sizeof(T), NULL);
 		return ret;
 	}
+
+	template <class T>
+	void Write(DWORD dwAddress, T value)
+	{
+		WriteProcessMemory(hProc, (LPVOID)dwAddress, value, sizeof(T), 0);
+	}
 };
 
