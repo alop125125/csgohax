@@ -110,10 +110,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LocalPlayer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Math.cpp" />
     <ClCompile Include="Memory.cpp" />
+    <ClCompile Include="offsets.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="LocalPlayer.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="offsets.h" />
   </ItemGroup>

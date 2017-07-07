@@ -1,8 +1,9 @@
 #include "Memory.h"
-#include <iostream>
 
 
 Memory::Memory()
+	:
+	isAttach(false)
 {
 }
 
@@ -25,9 +26,9 @@ void Memory::AttachProcess(const char* name)
 			{
 				ProcID = ProcEntry.th32ProcessID;
 				CloseHandle(hPID);
-
-
 				hProc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, ProcID);
+				isAttach = true;
+
 				return;
 			}
 		}

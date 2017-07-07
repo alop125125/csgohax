@@ -30,5 +30,9 @@ public:
 	{
 		WriteProcessMemory(hProc, (LPVOID)dwAddress, value, sizeof(T), 0);
 	}
+
+
+public:
+	bool isAttach;
 };
 
