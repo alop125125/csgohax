@@ -9,10 +9,30 @@ Math::~Math()
 {
 }
 
-fVector2 fVector3To2(fVector3* const vec)
+
+
+fVector2 Math::ClampAngles(fVector2 AngleToNormalize)
 {
-	fVector2 returnVec;
-	returnVec.x = vec->x;
-	returnVec.y = vec->y;
-	return returnVec;
+	fVector2 vec = AngleToNormalize;
+	if (vec.x > 89.0f && vec.x <= 180.0f)
+	{
+		vec.x = 89.0f;
+	}
+	while (vec.x > 180.f)
+	{
+		vec.x -= 360.f;
+	}
+	while (vec.x < -89.0f)
+	{
+		vec.x = -89.0f;
+	}
+	while (vec.y > 180.f)
+	{
+		vec.y -= 360.f;
+	}
+	while (vec.y < -180.f)
+	{
+		vec.y += 360.f;
+	}
+	return vec;
 }

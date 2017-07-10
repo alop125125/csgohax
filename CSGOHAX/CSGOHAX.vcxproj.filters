@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Manager">
       <UniqueIdentifier>{dc5edf02-fd2a-48a3-9858-8678a4625a1a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Maager">
+      <UniqueIdentifier>{4e97d3ed-8717-4d2b-aaa5-52a097136746}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -39,25 +42,31 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Memory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="offsets.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LocalPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Header Files\Maager</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Header Files\Maager</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory.h">
+      <Filter>Header Files\Maager</Filter>
+    </ClInclude>
+    <ClInclude Include="offsets.h">
+      <Filter>Header Files\Maager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

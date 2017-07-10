@@ -39,5 +39,6 @@ void Engine::SetViewAngles(fVector2 Angle)
 void Engine::SetViewAngles(float x, float y)
 {
 	fVector2 Angle = { x,y };
-	mem->Write<fVector2>(ClientStateBase + off->dwClientState_ViewAngles, Angle);
+	fVector2 Clamped = Math::ClampAngles(Angle);
+	mem->Write<fVector2>(ClientStateBase + off->dwClientState_ViewAngles, Clamped);
 }

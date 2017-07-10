@@ -20,7 +20,6 @@ class Math
 public:
 	Math();
 	~Math();
+	static fVector2 ClampAngles(fVector2 AngleToNormalize);
 };
-
-fVector2 fVector3To2(fVector3* const vec);
 
