@@ -71,14 +71,14 @@ public:
 	//DWORD m_vecVelocity;
 	//DWORD m_vecViewOffset;
 	//DWORD m_viewPunchAngle;
-	//DWORD dwClientState;
+	DWORD dwClientState;
 	//DWORD dwClientState_GetLocalPlayer;
 	//DWORD dwClientState_Map;
 	//DWORD dwClientState_MapDirectory;
 	//DWORD dwClientState_MaxPlayer;
 	//DWORD dwClientState_PlayerInfo;
 	//DWORD dwClientState_State;
-	//DWORD dwClientState_ViewAngles;
+	DWORD dwClientState_ViewAngles;
 	//DWORD dwClientState_IsHLTV;
 	//DWORD dwEntityList;
 	//DWORD dwForceAttack;

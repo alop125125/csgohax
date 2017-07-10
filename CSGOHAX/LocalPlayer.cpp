@@ -5,10 +5,9 @@ LocalPlayer::LocalPlayer(Memory* memory, DWORD ClientDLLBase, offset* Offset)
 	:
 	mem(memory),
 	ClientBase(ClientDLLBase),
-	off(Offset), //RUN DEBUG FOR INFO
-	LocalPlayerBase(mem->Read<DWORD>(ClientBase + off->dwLocalPlayer))
+	off(Offset)	
 {
-	
+	LocalPlayerBase = mem->Read<DWORD>(ClientBase + off->dwLocalPlayer);
 }
 
 

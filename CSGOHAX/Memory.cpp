@@ -1,6 +1,5 @@
 #include "Memory.h"
 
-
 Memory::Memory()
 	:
 	isAttach(false)
