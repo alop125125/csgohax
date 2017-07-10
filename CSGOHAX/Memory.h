@@ -24,11 +24,22 @@ public:
 		ReadProcessMemory(hProc, (LPVOID)dwAddress, &ret, sizeof(T), NULL);
 		return ret;
 	}
+	template <class T>
+	T Read(DWORD dwAddress, DWORD Offset)
+	{
+		DWORD base;
+		ReadProcessMemory(hProc, (LPVOID)dwAddress, &base, sizeof(T), NULL);
+
+		DWORD AddrOff = base + Offset;
+		T returned;
+		ReadProcessMemory(hProc, (LPVOID)AddrOff, &returned, sizeof(T), NULL);
+		return returned;
+	}
 
 	template <class T>
 	void Write(DWORD dwAddress, T value)
 	{
-		WriteProcessMemory(hProc, (LPVOID)dwAddress, value, sizeof(T), 0);
+		WriteProcessMemory(hProc, (LPVOID)dwAddress, &value, sizeof(T), 0);
 	}
 
 

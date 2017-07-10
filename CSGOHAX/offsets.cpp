@@ -8,6 +8,7 @@ offset::offset()
 	dwLocalPlayer = cfg->getValueOfKey<DWORD>("dwLocalPlayer");
 	dwClientState = cfg->getValueOfKey<DWORD>("dwClientState");
 	dwClientState_ViewAngles = cfg->getValueOfKey<DWORD>("dwClientState_ViewAngles");
+	dwClientState_State = cfg->getValueOfKey<DWORD>("dwClientState_State");
 }
 
 offset::~offset()

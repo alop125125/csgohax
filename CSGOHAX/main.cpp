@@ -3,10 +3,16 @@
 #include "LocalPlayer.h"
 #include "offsets.h"
 #include "Math.h"
+#include "Engine.h"
 
 using namespace std;
 
 
+ostream& operator<<(ostream& os, const fVector2& vec)
+{
+	os << "{" << vec.x << "," << vec.y << "}";
+	return os;
+}
 
 int main()
 {
@@ -19,13 +25,17 @@ int main()
 	DWORD EngineDLL = mem.FindModuleBase("engine.dll");
 
 	LocalPlayer Player(&mem, ClientDll, &off);
-
-	DWORD ClientState = mem.Read<DWORD>(EngineDLL + off.dwClientState);
+	Engine en(&mem, EngineDLL, &off);
+	
 	while (true)
 	{
-		fVector3 view = mem.Read<fVector3>(ClientState + off.dwClientState_ViewAngles);
-		
-		Sleep(1000);
+		cout << en.GetViewAngles() << endl;
+
+		if (GetAsyncKeyState(VK_INSERT) && en.isIngame())
+		{
+			en.SetViewAngles(0.f,0.f);
+		}
+		Sleep(100);
 	}
 
 	Sleep(1);

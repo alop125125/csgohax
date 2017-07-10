@@ -77,10 +77,10 @@ public:
 	//DWORD dwClientState_MapDirectory;
 	//DWORD dwClientState_MaxPlayer;
 	//DWORD dwClientState_PlayerInfo;
-	//DWORD dwClientState_State;
+	DWORD dwClientState_State;
 	DWORD dwClientState_ViewAngles;
 	//DWORD dwClientState_IsHLTV;
-	//DWORD dwEntityList;
+	DWORD dwEntityList;
 	//DWORD dwForceAttack;
 	//DWORD dwForceAttack2;
 	//DWORD dwForceBackward;
