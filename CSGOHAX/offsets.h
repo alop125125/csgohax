@@ -72,7 +72,7 @@ public:
 	//DWORD m_vecViewOffset;
 	//DWORD m_viewPunchAngle;
 	DWORD dwClientState;
-	//DWORD dwClientState_GetLocalPlayer;
+	DWORD dwClientState_GetLocalPlayer;
 	//DWORD dwClientState_Map;
 	//DWORD dwClientState_MapDirectory;
 	//DWORD dwClientState_MaxPlayer;
@@ -113,4 +113,4 @@ public:
 	//DWORD m_pStudioHdr;
 };
 
-
+extern offset off;

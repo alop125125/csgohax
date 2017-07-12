@@ -3,16 +3,19 @@
 #include "offsets.h"
 #include "Math.h"
 
+#define INDEX_LOCAL 883
+
 class Entity
 {
 public:
 	Entity();
 	~Entity();
 
-	void Update(int iIndex);
+	bool Update(int iIndex);
 
 	fVector3 GetOrigin();
 	fVector3 GetVelocity();
+
 
 	int GetTeam();
 	int GetHealth();
@@ -30,10 +33,14 @@ public:
 	bool isDormant();
 
 private:
+	DWORD ClientBase;
+
 	int m_iIndex;
 
 	fVector3 m_vOrigin;
 	fVector3 m_vVelocity;
+	
+	DWORD Ent;
 	
 	int m_iTeamNum;
 	int m_iHealth;

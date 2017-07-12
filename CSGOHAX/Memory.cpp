@@ -1,5 +1,7 @@
 #include "Memory.h"
 
+Memory mem;
+
 Memory::Memory()
 	:
 	isAttach(false)
@@ -9,6 +11,16 @@ Memory::Memory()
 
 Memory::~Memory()
 {
+}
+
+DWORD Memory::GetClient()
+{
+	return ClientBase;
+}
+
+DWORD Memory::GetEngine()
+{
+	return EngineBase;
 }
 
 void Memory::AttachProcess(const char* name)
@@ -49,6 +61,16 @@ DWORD Memory::FindModuleBase(const char* name)
 		
 		if (!strcmp(ModEntry.szModule, name))
 		{
+			if (!strcmp(ModEntry.szModule, "client.dll"))
+			{
+				ClientBase = (DWORD)ModEntry.modBaseAddr;
+			}
+			if (!strcmp(ModEntry.szModule, "engine.dll"))
+			{
+				EngineBase = (DWORD)ModEntry.modBaseAddr;
+			}
+
+
 			CloseHandle(hMID);
 			return (DWORD)ModEntry.modBaseAddr;
 		}

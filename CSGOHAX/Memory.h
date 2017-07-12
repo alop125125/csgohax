@@ -12,9 +12,14 @@ public:
 	void AttachProcess(const char* name);
 	DWORD FindModuleBase(const char* name);
 
+	DWORD GetClient();
+	DWORD GetEngine();
 private:
 	DWORD ProcID;
 	HANDLE hProc;
+
+	DWORD ClientBase;
+	DWORD EngineBase;
 
 public:
 	template <class T>
@@ -46,4 +51,6 @@ public:
 public:
 	bool isAttach;
 };
+
+extern Memory mem;
 

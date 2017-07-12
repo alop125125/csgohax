@@ -1,9 +1,9 @@
 #include <iostream>
 #include "Memory.h"
-#include "LocalPlayer.h"
 #include "offsets.h"
 #include "Math.h"
 #include "Engine.h"
+#include "Entity.h"
 
 using namespace std;
 
@@ -21,33 +21,28 @@ ostream& operator<<(ostream& os, const fVector3& vec)
 
 int main()
 {
-	offset off;
-
-	Memory mem;
 	mem.AttachProcess("csgo.exe");
 
 	DWORD ClientDll = mem.FindModuleBase("client.dll");
 	DWORD EngineDLL = mem.FindModuleBase("engine.dll");
 
-	LocalPlayer Player(&mem, ClientDll, &off);
-	Engine en(&mem, EngineDLL, &off);
+	//LocalPlayer Player(&mem, ClientDll, &off);
+	Engine en(EngineDLL);
 	
-	
-	
+	DWORD LocalPlayer = mem.Read<DWORD>(ClientDll + off.dwLocalPlayer);
+
+	LocalEntity.Update(INDEX_LOCAL);
+
 	while (true)
 	{
-		int CrossHairID = mem.Read<int>(Player.GetPlayerBase() + off.m_iCrosshairId);
-		if (CrossHairID > 0 && CrossHairID < 65)
-		{
-			DWORD EntInCH = mem.Read<DWORD>(ClientDll + off.dwEntityList + (CrossHairID - 1) * 0x10);
-			int EntHP = mem.Read<int>(EntInCH + off.m_iHealth);
-			cout << EntHP << endl;
-		}
+		cout << LocalEntity.GetHealth() << endl;
+		
 		Sleep(100);
+		
 
 	}
 	
 	
-	Sleep(1);
+	
 	
 }

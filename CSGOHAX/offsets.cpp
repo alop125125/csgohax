@@ -1,5 +1,7 @@
 #include "offsets.h"
 
+offset off;
+
 offset::offset()
 	:
 	cfg(new ConfigFile("offsets.cfg"))
@@ -14,6 +16,7 @@ offset::offset()
 	m_iCrosshairId = cfg->getValueOfKey<DWORD>("m_iCrosshairId");
 	dwEntityList = cfg->getValueOfKey<DWORD>("dwEntityList");
 	m_fFlags = cfg->getValueOfKey<DWORD>("m_fFlags");
+	dwClientState_GetLocalPlayer = cfg->getValueOfKey<DWORD>("dwClientState_GetLocalPlayer");
 }
 
 offset::~offset()
