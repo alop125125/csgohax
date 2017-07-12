@@ -13,6 +13,11 @@ ostream& operator<<(ostream& os, const fVector2& vec)
 	os << "{" << vec.x << "," << vec.y << "}";
 	return os;
 }
+ostream& operator<<(ostream& os, const fVector3& vec)
+{
+	os << "{" << vec.x << ", " << vec.y << ", " << vec.z << "}";
+	return os;
+}
 
 int main()
 {
@@ -27,17 +32,22 @@ int main()
 	LocalPlayer Player(&mem, ClientDll, &off);
 	Engine en(&mem, EngineDLL, &off);
 	
+	
+	
 	while (true)
 	{
-		cout << en.GetViewAngles() << endl;
-
-		if (GetAsyncKeyState(VK_INSERT) && en.isIngame())
+		int CrossHairID = mem.Read<int>(Player.GetPlayerBase() + off.m_iCrosshairId);
+		if (CrossHairID > 0 && CrossHairID < 65)
 		{
-			en.SetViewAngles(0.f,0.f);
+			DWORD EntInCH = mem.Read<DWORD>(ClientDll + off.dwEntityList + (CrossHairID - 1) * 0x10);
+			int EntHP = mem.Read<int>(EntInCH + off.m_iHealth);
+			cout << EntHP << endl;
 		}
 		Sleep(100);
-	}
 
+	}
+	
+	
 	Sleep(1);
 	
 }

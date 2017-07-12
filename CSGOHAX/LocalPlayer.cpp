@@ -27,3 +27,8 @@ int LocalPlayer::GetHealth()
 	return Health;
 	
 }
+
+int LocalPlayer::GetTeam()
+{
+	int Team = mem->Read<int>(LocalPlayerBase + off->m_iHealth);
+}

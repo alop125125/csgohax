@@ -10,6 +10,7 @@ public:
 
 	DWORD GetPlayerBase();
 	int GetHealth();
+	int GetTeam();
 
 private:
 	DWORD ClientBase;

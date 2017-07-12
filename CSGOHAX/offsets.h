@@ -33,7 +33,7 @@ public:
 	//DWORD m_bSpottedByMask;
 	//DWORD m_dwBoneMatrix;
 	//DWORD m_fAccuracyPenalty;
-	//DWORD m_fFlags;
+	DWORD m_fFlags;
 	//DWORD m_flFallbackWear;
 	//DWORD m_flFlashDuration;
 	//DWORD m_flFlashMaxAlpha;
@@ -47,7 +47,7 @@ public:
 	//DWORD m_iClip1;
 	//DWORD m_iCompetitiveRanking;
 	//DWORD m_iCompetitiveWins;
-	//DWORD m_iCrosshairId;
+	DWORD m_iCrosshairId;
 	//DWORD m_iEntityQuality;
 	//DWORD m_iFOVStart;
 	//DWORD m_iGlowIndex;
@@ -57,7 +57,7 @@ public:
 	//DWORD m_iObserverMode;
 	//DWORD m_iShotsFired;
 	//DWORD m_iState;
-	//DWORD m_iTeamNum;
+	DWORD m_iTeamNum;
 	//DWORD m_lifeState;
 	//DWORD m_nFallbackPaintKit;
 	//DWORD m_nFallbackSeed;
@@ -67,7 +67,7 @@ public:
 	//DWORD m_rgflCoordinateFrame;
 	//DWORD m_szCustomName;
 	//DWORD m_szLastPlaceName;
-	//DWORD m_vecOrigin;
+	DWORD m_vecOrigin;
 	//DWORD m_vecVelocity;
 	//DWORD m_vecViewOffset;
 	//DWORD m_viewPunchAngle;
