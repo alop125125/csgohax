@@ -27,6 +27,13 @@ struct fVector3
 		z += vec.z;
 		return *this;
 	}
+	bool isZero()
+	{
+		if (x == 0.f && y == 0.f && z == 0.f)
+			return true;
+		else
+			return false;
+	}
 };
 
 class Math

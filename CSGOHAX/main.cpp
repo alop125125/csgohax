@@ -31,18 +31,33 @@ int main()
 	
 	DWORD LocalPlayer = mem.Read<DWORD>(ClientDll + off.dwLocalPlayer);
 
-	LocalEntity.Update(INDEX_LOCAL);
+	
+	for (int i = 0; i < 65; i++)
+	{
+		EntityList[i].Update(i);
+	}
 
 	while (true)
 	{
-		cout << LocalEntity.GetHealth() << endl;
-		
-		Sleep(100);
-		
+		LocalEntity.Update(INDEX_LOCAL);
+		/*for (int i = 0; i < 65; i++)
+		{
+			bool isCont = EntityList[i].isValid();
+			if (isCont)
+				cout << EntityList[i].GetHealth() << endl;	
+		}*/
 
+		int CH = LocalEntity.GetCrosshairId() - 1;
+		if (CH < 0)
+		{
+			Sleep(100);
+			continue;
+		}
+		if (EntityList[CH].isValid())
+			cout << EntityList[CH].GetHealth() << endl;
+
+		Sleep(100);
+	
 	}
-	
-	
-	
 	
 }
