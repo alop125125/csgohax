@@ -110,6 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Aimbot.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
@@ -118,9 +119,11 @@
     <ClCompile Include="offsets.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Aimbot.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="enums.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="offsets.h" />

@@ -2,15 +2,25 @@
 #include <Windows.h>
 #include <iostream>
 
+#define M_PI 3.14159265f
+
+
 struct fVector2
 {
 	float x;
 	float y;
-	fVector2 operator+(fVector2 const& vec)
+	fVector2 operator+(const fVector2& vec)
 	{
 		x += vec.x;
 		y += vec.y;
 		return *this;
+	}
+	bool isZero()
+	{
+		if (x == 0.f && y == 0.f)
+			return true;
+		else
+			return false;
 	}
 };
 
@@ -20,11 +30,27 @@ struct fVector3
 	float y;
 	float z;
 
-	fVector3 operator+(fVector3 const& vec)
+	fVector3& operator+(const fVector3& vec)
 	{
 		x += vec.x;
 		y += vec.y;
 		z += vec.z;
+		return *this;
+	}
+	fVector3& operator-(const fVector3& v)
+	{
+		x -= v.x;
+		y -= v.y;
+		z -= v.z;
+
+		return *this;
+	}
+	fVector3& operator=(const fVector2& v)
+	{
+		x = v.x;
+		y = v.y;
+		z = 0;
+
 		return *this;
 	}
 	bool isZero()
@@ -42,5 +68,9 @@ public:
 	Math();
 	~Math();
 	static fVector2 ClampAngles(fVector2 AngleToNormalize);
+	static fVector3 ClampAngles(fVector3 AngleToNormalize);
+	static fVector3 CalcAngle(fVector3 FirstAngle, fVector3 SecondAngle);
+	static fVector2 V3toV2(fVector3 Angle);
+	static fVector3 V2toV3(fVector2 Angle);
 };
 

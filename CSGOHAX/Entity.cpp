@@ -44,56 +44,47 @@ bool Entity::Update(int iIndex)
 	if (!Ent)
 		return false;
 
-	
-
-	m_iHealth = mem.Read<int>(Ent + off.m_iHealth);
-	m_vOrigin = mem.Read<fVector3>(Ent + off.m_vecOrigin);
-	m_vVelocity = mem.Read<fVector3>(Ent + off.m_vecVelocity);
-
-	m_iTeamNum = mem.Read<int>(Ent + off.m_iTeamNum);
-	m_iFlags = mem.Read<int>(Ent + off.m_fFlags);
-	m_iCrosshairID = mem.Read<int>(Ent + off.m_iCrosshairId);
-	m_hActiveWeapon = mem.Read<int>(Ent + off.m_hActiveWeapon);
-	
 
 	m_iCompetitiveRanking; //process->Read<int>( g_pStatic->GameResources + g_pDynamic->m_iCompetitiveRanking + m_iIndex * 4 );
 	m_iCompetitiveWins;   //process->Read<int>( g_pStatic->GameResources + g_pDynamic->m_iCompetitiveWins + m_iIndex * 4 );
 
-	m_flFlashDuration;
-
-	m_bDead = mem.Read<bool>(Ent + off.m_lifeState);
-	m_bIsDormant = mem.Read<bool>(Ent + 0xE9);
 
 	return true;
 }
 
 fVector3 Entity::GetOrigin()
 {
+	m_vOrigin = mem.Read<fVector3>(Ent + off.m_vecOrigin);
 	return m_vOrigin;
 }
 
 fVector3 Entity::GetVelocity()
 {
+	m_vVelocity = mem.Read<fVector3>(Ent + off.m_vecVelocity);
 	return m_vVelocity;
 }
 
 int Entity::GetTeam()
 {
+	m_iTeamNum = mem.Read<int>(Ent + off.m_iTeamNum);
 	return m_iTeamNum;
 }
 
 int Entity::GetHealth()
 {
+	m_iHealth = mem.Read<int>(Ent + off.m_iHealth);
 	return m_iHealth;
 }
 
 int Entity::GetFlags()
 {
+	m_iFlags = mem.Read<int>(Ent + off.m_fFlags);
 	return m_iFlags;
 }
 
 int Entity::GetCrosshairId()
 {
+	m_iCrosshairID = mem.Read<int>(Ent + off.m_iCrosshairId);
 	return m_iCrosshairID;
 }
 
@@ -133,6 +124,8 @@ bool Entity::isValid()
 
 	if (GetHealth() < 1)
 		return false;
+	if (isImmune())
+		return false;
 
 	return true;
 }
@@ -140,10 +133,18 @@ bool Entity::isValid()
 
 bool Entity::isDead()
 {
+	m_bDead = mem.Read<bool>(Ent + off.m_lifeState);
 	return m_bDead;
 }
 
 bool Entity::isDormant()
 {
+	m_bIsDormant = mem.Read<bool>(Ent + 0xE9);
 	return m_bIsDormant;
+}
+
+bool Entity::isImmune()
+{
+	m_bIsImmune = mem.Read<bool>(Ent + off.m_bGunGameImmunity);
+	return m_bIsImmune;
 }

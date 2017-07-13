@@ -31,6 +31,7 @@ public:
 	bool isValid();
 	bool isDead();
 	bool isDormant();
+	bool isImmune();
 
 private:
 	DWORD ClientBase;
@@ -46,7 +47,6 @@ private:
 	int m_iHealth;
 	int m_iFlags;
 	int m_iCrosshairID;
-	int m_hActiveWeapon;
 	int m_iWeaponId;
 
 	int m_iCompetitiveRanking;
@@ -56,7 +56,7 @@ private:
 	
 	bool m_bDead;
 	bool m_bIsDormant;
-	
+	bool m_bIsImmune;
 
 };
 

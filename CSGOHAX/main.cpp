@@ -31,7 +31,8 @@ int main()
 	
 	DWORD LocalPlayer = mem.Read<DWORD>(ClientDll + off.dwLocalPlayer);
 
-	
+	LocalEntity.Update(INDEX_LOCAL);
+
 	for (int i = 0; i < 65; i++)
 	{
 		EntityList[i].Update(i);
@@ -39,22 +40,27 @@ int main()
 
 	while (true)
 	{
-		LocalEntity.Update(INDEX_LOCAL);
-		/*for (int i = 0; i < 65; i++)
+		fVector3 loc = { 0,0,0 };
+		for (int i = 0; i < 65; i++)
 		{
-			bool isCont = EntityList[i].isValid();
-			if (isCont)
-				cout << EntityList[i].GetHealth() << endl;	
-		}*/
-
-		int CH = LocalEntity.GetCrosshairId() - 1;
-		if (CH < 0)
-		{
-			Sleep(100);
-			continue;
+			if (EntityList[i].isValid() && LocalEntity.GetTeam() != EntityList[i].GetTeam())
+			{
+				loc = EntityList[i].GetOrigin();
+				//cout << loc << endl;
+			}
 		}
-		if (EntityList[CH].isValid())
-			cout << EntityList[CH].GetHealth() << endl;
+
+		if (loc.isZero())
+			continue;
+
+		fVector3 Lock = Math::CalcAngle(LocalEntity.GetOrigin(), loc);
+		fVector3 Clamp = Math::ClampAngles(Lock);
+
+		if (GetAsyncKeyState(VK_MENU))
+		{
+			en.SetViewAngles(Math::V3toV2(Clamp));
+		}
+		
 
 		Sleep(100);
 	
