@@ -16,12 +16,15 @@ public:
 private:
 	void DropTarget();
 
-	int m_iTarget = -1;
-	int m_iBest;
+private:
+
+	int m_iTarget;
+	int m_iBone;
 
 	bool m_bAimbot;
 
 	float m_flSmooth;
+	float m_flBest;
 
 };
 

@@ -22,3 +22,4 @@ private:
 	DWORD ClientStateBase;
 };
 
+extern Engine engine;

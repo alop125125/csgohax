@@ -1,6 +1,6 @@
 #include "Engine.h"
 
-
+Engine engine;
 
 Engine::Engine(DWORD EngineDllBase)
 	:

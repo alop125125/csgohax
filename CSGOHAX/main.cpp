@@ -28,8 +28,6 @@ int main()
 
 	//LocalPlayer Player(&mem, ClientDll, &off);
 	Engine en(EngineDLL);
-	
-	DWORD LocalPlayer = mem.Read<DWORD>(ClientDll + off.dwLocalPlayer);
 
 	LocalEntity.Update(INDEX_LOCAL);
 

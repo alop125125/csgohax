@@ -1,5 +1,6 @@
 #include "Math.h"
-
+#define DEG2RAD( x  )  ( (float)(x) * (float)( M_PI_F / 180.f ) )
+#define RAD2DEG( x  )  ( (float)(x) * (float)( 180.f/M_PI_F ) )
 
 Math::Math()
 {
@@ -93,4 +94,38 @@ fVector3 Math::ClampAngles(fVector3 AngleToNormalize)
 	}
 
 	return vec;
+}
+void Math::MakeVector( fVector3 angle, fVector3& vector )
+{
+	float pitch = float( angle.x * M_PI / 180 );
+	float yaw = float( angle.y * M_PI / 180 );
+	float tmp = float( cos( pitch ) );
+	vector.x = float( -tmp * -cos( yaw ) );
+	vector.y = float( sin( yaw )*tmp );
+	vector.z = float( -sin( pitch ) );
+}
+
+
+
+float Math::radianToDeg(float rad)
+{
+	return (rad * M_PI / 180);
+}
+
+float Dot(const fVector3 &v1, fVector3 &v2)
+{
+	return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+}
+
+float Math::GetFov(fVector3 angle, fVector3 src, fVector3 dst)
+{
+	fVector3 ang, aim;
+	ang = CalcAngle(src, dst);
+	MakeVector(angle, aim);
+	MakeVector(ang, ang);
+
+	float mag = sqrt(pow(aim.x, 2) + pow(aim.y, 2) + pow(aim.z, 2));
+	float u_dot_v = Dot(aim, ang);
+	
+	return RAD2DEG(acos(u_dot_v / (pow(mag, 2))));
 }
