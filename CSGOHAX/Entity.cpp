@@ -148,3 +148,9 @@ bool Entity::isImmune()
 	m_bIsImmune = mem.Read<bool>(Ent + off.m_bGunGameImmunity);
 	return m_bIsImmune;
 }
+
+fVector3 Entity::GetEyePos()
+{
+	m_vEye = GetOrigin() + mem.Read<fVector3>(Ent + off.m_vecViewOffset);
+	return m_vEye;
+}

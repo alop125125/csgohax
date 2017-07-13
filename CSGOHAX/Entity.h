@@ -15,7 +15,7 @@ public:
 
 	fVector3 GetOrigin();
 	fVector3 GetVelocity();
-
+	fVector3 GetEyePos();
 
 	int GetTeam();
 	int GetHealth();
@@ -40,7 +40,8 @@ private:
 
 	fVector3 m_vOrigin;
 	fVector3 m_vVelocity;
-	
+	fVector3 m_vEye;
+
 	DWORD Ent;
 	
 	int m_iTeamNum;
