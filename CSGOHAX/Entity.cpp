@@ -44,9 +44,10 @@ bool Entity::Update(int iIndex)
 	if (!Ent)
 		return false;
 
+	dwBoneMatrix = mem.Read<DWORD>(Ent + off.m_dwBoneMatrix);
 
-	m_iCompetitiveRanking; //process->Read<int>( g_pStatic->GameResources + g_pDynamic->m_iCompetitiveRanking + m_iIndex * 4 );
-	m_iCompetitiveWins;   //process->Read<int>( g_pStatic->GameResources + g_pDynamic->m_iCompetitiveWins + m_iIndex * 4 );
+	//m_iCompetitiveRanking; //process->Read<int>( g_pStatic->GameResources + g_pDynamic->m_iCompetitiveRanking + m_iIndex * 4 );
+	//m_iCompetitiveWins;   //process->Read<int>( g_pStatic->GameResources + g_pDynamic->m_iCompetitiveWins + m_iIndex * 4 );
 
 
 	return true;
@@ -64,11 +65,21 @@ fVector3 Entity::GetVelocity()
 	return m_vVelocity;
 }
 
+fVector3 Entity::GetBonePos(int iBone)
+{
+	fVector3 ret;
+	ret.x = mem.Read<float>(dwBoneMatrix + 0x30 * iBone + 0x0c);
+	ret.y = mem.Read<float>(dwBoneMatrix + 0x30 * iBone + 0x1c);
+	ret.z = mem.Read<float>(dwBoneMatrix + 0x30 * iBone + 0x2c);
+	return ret;
+}
+
 int Entity::GetTeam()
 {
 	m_iTeamNum = mem.Read<int>(Ent + off.m_iTeamNum);
 	return m_iTeamNum;
 }
+
 
 int Entity::GetHealth()
 {

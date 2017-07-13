@@ -109,7 +109,7 @@ void Math::MakeVector( fVector3 angle, fVector3& vector )
 
 float Math::radianToDeg(float rad)
 {
-	return (rad * M_PI / 180);
+	return (rad * M_PI_F / 180);
 }
 
 float Dot(const fVector3 &v1, fVector3 &v2)

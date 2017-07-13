@@ -16,6 +16,7 @@ public:
 	fVector3 GetOrigin();
 	fVector3 GetVelocity();
 	fVector3 GetEyePos();
+	fVector3 GetBonePos(int iBone);
 
 	int GetTeam();
 	int GetHealth();
@@ -41,7 +42,8 @@ private:
 	fVector3 m_vOrigin;
 	fVector3 m_vVelocity;
 	fVector3 m_vEye;
-
+	
+	DWORD dwBoneMatrix;
 	DWORD Ent;
 	
 	int m_iTeamNum;

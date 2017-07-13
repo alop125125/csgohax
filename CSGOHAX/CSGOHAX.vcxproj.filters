@@ -77,8 +77,5 @@
     <ClInclude Include="Engine.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="enums.h">
-      <Filter>Header Files\Manager</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,11 +2,9 @@
 
 Engine engine;
 
-Engine::Engine(DWORD EngineDllBase)
-	:
-	EngineBase(EngineDllBase)
+Engine::Engine()
 {
-	ClientStateBase = mem.Read<DWORD>(EngineBase + off.dwClientState);
+	
 }
 
 
@@ -14,6 +12,12 @@ Engine::~Engine()
 {
 }
 
+
+void Engine::setup()
+{
+	EngineBase = mem.GetEngine();
+	ClientStateBase = mem.Read<DWORD>(EngineBase + off.dwClientState);
+}
 
 bool Engine::isIngame()
 {

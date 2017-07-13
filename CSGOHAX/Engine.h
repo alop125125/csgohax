@@ -6,12 +6,15 @@
 class Engine
 {
 public:
-	Engine(DWORD EngineDllBase);
+	Engine();
 	~Engine();
 
+
+	void setup();
 	bool isIngame();
 
 	fVector2 GetViewAngles();
+	
 
 	void SetViewAngles(fVector2 Angle);
 	void SetViewAngles(float x, float y);
