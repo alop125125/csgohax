@@ -21,7 +21,7 @@ Entity::~Entity()
 {
 }
 
-bool Entity::Update(int iIndex)
+bool Entity::Update(int iIndex)//CURRENTLY RETURNED FALSE AFTER JOINING NEW GAME
 {
 	ClientBase = mem.GetClient();
 

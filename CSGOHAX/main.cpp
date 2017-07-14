@@ -58,9 +58,9 @@ void AimbotLoop()
 		if (engine.isIngame())
 		{
 			aimbot.FindTarget();
-			aimbot.GotoTarget();
-			this_thread::sleep_for(chrono::milliseconds(1));
+			aimbot.GotoTarget();		
 		}
+		this_thread::sleep_for(chrono::milliseconds(1));
 	}
 }
 
