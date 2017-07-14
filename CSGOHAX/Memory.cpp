@@ -2,10 +2,10 @@
 
 Memory mem;
 
+//init values
 Memory::Memory()
-	:
-	isAttach(false)
 {
+
 }
 
 
@@ -13,54 +13,57 @@ Memory::~Memory()
 {
 }
 
+//TODO Improve
 DWORD Memory::GetClient()
 {
 	return ClientBase;
 }
 
+//TODO Improve
 DWORD Memory::GetEngine()
 {
 	return EngineBase;
 }
 
-void Memory::AttachProcess(const char* name)
+//stores a handle to the process
+bool Memory::AttachProcess(const char* name)
 {
-	
+	//get snapshot of processes
 	HANDLE hPID = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, NULL);
 	PROCESSENTRY32 ProcEntry;
 	ProcEntry.dwSize = sizeof(ProcEntry);
 
+	//while the current process is not name
 	do
-		{ 
-			
+		{ 	
 			if (!strcmp(ProcEntry.szExeFile, name))
 			{
-				ProcID = ProcEntry.th32ProcessID;
-				CloseHandle(hPID);
-				hProc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, ProcID);
-				isAttach = true;
-
-				return;
+				m_dwProcID = ProcEntry.th32ProcessID; //set proc id
+				CloseHandle(hPID); //close handle
+				hProc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_dwProcID);
+				return true;
 			}
 		}
 	while (Process32Next(hPID, &ProcEntry));
 
-	MessageBox(NULL, "No Good Process Found", "ERRROROROOROR", MB_OKCANCEL);
-	system("pause");
-	exit(0);
+	return false;
 }
 
+//finds the base address of the module specified in the name paramater
 DWORD Memory::FindModuleBase(const char* name)
 {
-	HANDLE hMID = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, ProcID);
+	//take snapshot of m_dwProcID's modules
+	HANDLE hMID = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, m_dwProcID);
 	MODULEENTRY32 ModEntry;
 	ModEntry.dwSize = sizeof(ModEntry);
 
+	//loop till module is equal to name
 	do
-	{
-		
+	{	
 		if (!strcmp(ModEntry.szModule, name))
 		{
+
+			//Please dont do this just dont
 			if (!strcmp(ModEntry.szModule, "client.dll"))
 			{
 				ClientBase = (DWORD)ModEntry.modBaseAddr;
@@ -76,8 +79,7 @@ DWORD Memory::FindModuleBase(const char* name)
 		}
 	} while (Module32Next(hMID, &ModEntry));
 	
-	MessageBox(NULL, "No Good Modules Found", "ERRROROROOROR", MB_OKCANCEL);
-	system("pause");
-	exit(0);
-
+	//if it goes through all and never finds it exit and give message box
+	MessageBox(NULL, "Module Not Found", "Error", MB_OK);
+	exit(1);
 }

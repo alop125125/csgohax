@@ -53,7 +53,22 @@ struct fVector3
 
 		return *this;
 	}
+	fVector3 operator/(const float v)
+	{
+		x /= v;
+		y /= v;
+		z /= v;
 
+		return *this;
+	}
+	fVector3 operator*(const float v)
+	{
+		x *= v;
+		y *= v;
+		z *= v;
+
+		return *this;
+	}
 	bool isZero()
 	{
 		if (x == 0.f && y == 0.f && z == 0.f)
@@ -79,5 +94,37 @@ public:
 	static void MakeVector(fVector3 angle, fVector3& vector);
 	static fVector3 CalcAngle(fVector3 FirstAngle, fVector3 SecondAngle);
 	static float GetFov(fVector3 angle, fVector3 src, fVector3 dst);
+	static fVector3 Smooth(fVector3 src, fVector3 flLocalAngles, int iSmooth)
+	{
+		fVector3 back;
+		float smoothdiff[2];
+		src.x -= flLocalAngles.x;
+		src.y -= flLocalAngles.y;
+
+		if (src.x >= 180)
+			src.x -= 360;
+		if (src.y > 180)
+			src.y -= 360;
+		if (src.x < -180)
+			src.x += 360;
+		if (src.y < -180)
+			src.y += 360;
+
+		smoothdiff[0] = src.x / iSmooth;
+		smoothdiff[1] = src.y / iSmooth;
+		back.x = flLocalAngles.x + smoothdiff[0];
+		back.y = flLocalAngles.y + smoothdiff[1];
+		back.z = flLocalAngles.z;
+
+		if (back.x > 180)
+			back.x -= 360;
+		if (back.y > 180)
+			back.y -= 360;
+		if (back.x < -180)
+			back.x += 360;
+		if (back.y < -180)
+			back.y += 360;
+		return back;
+	}
 };
 

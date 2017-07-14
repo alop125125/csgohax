@@ -16,15 +16,17 @@ private:
 	void DropTarget();
 
 private:
+	//declarations
+	int m_iVirualKey;
 
 	int m_iTarget;
 	int m_iBone;
+	int m_iSmooth;
 
 	bool m_bAimbot;
 
-	float m_flSmooth;
 	float m_flBest;
-
+	float m_flFov;
 };
 
-extern Aimbot aimbot;
+extern Aimbot aimbot; //global variable for using aimbot

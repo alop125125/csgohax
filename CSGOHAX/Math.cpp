@@ -21,8 +21,8 @@ fVector3 Math::CalcAngle(fVector3 FirstAngle, fVector3 SecondAngle)
 	AimAngles.z = 0.0f;
 	if (delta.x >= 0.0)
 		AimAngles.y += 180.0f;
-
-	return AimAngles;
+	fVector3 ret = ClampAngles(AimAngles);
+	return ret;
 }
 
 fVector2 Math::V3toV2(fVector3 Angle)
