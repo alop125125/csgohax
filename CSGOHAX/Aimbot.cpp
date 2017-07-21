@@ -136,56 +136,60 @@ void Aimbot::ApplyRcsToAimAngle(fVector3* pAngle)
 #pragma region Set/Get
 int Aimbot::GetBone()
 {
-
+	return m_iBone;
 }
 
 int Aimbot::GetSmooth()
 {
-
+	return m_iSmooth;
 }
 
-int Aimbot::GetMaxFov()
+float Aimbot::GetMaxFov()
 {
-
+	return m_flMaxFov;
 }
 
 bool Aimbot::GetAimbot()
 {
-
+	return m_bAimbot;
 }
 
 bool Aimbot::GetAimbotRCS()
 {
-
+	return m_bAimbotRCS;
 }
 
 void Aimbot::SetBone(int newBone)
 {
-
+	m_iBone = newBone;
 }
 
 void Aimbot::SetSmooth(int newSmooth)
 {
-
+	if (newSmooth <= 0 || newSmooth >= 1000)
+		return;
+	m_iSmooth = newSmooth;
 }
 
-void Aimbot::SetMaxFov(int newFov)
+void Aimbot::SetMaxFov(float newFov)
 {
-
+	if (newFov <= 0.f || newFov >= 180.f)
+		return;
+	m_flMaxFov = newFov;
 }
 
 void Aimbot::SetAimbot(bool State)
 {
-
+	m_bAimbot = State;
 }
 
 void Aimbot::SetAimbotRCS(bool State)
 {
-
+	m_bAimbotRCS = State;
 }
 
 void Aimbot::SetKey(int VirtualKey)
 {
-
+	m_iVirualKey = VirtualKey;
 }
 #pragma endregion

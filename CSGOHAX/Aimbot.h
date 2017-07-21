@@ -39,13 +39,13 @@ private:
 public:
 	int GetBone();
 	int GetSmooth();
-	int GetMaxFov();
+	float GetMaxFov();
 	bool GetAimbot();
 	bool GetAimbotRCS();
 
 	void SetBone(int newBone);
 	void SetSmooth(int newSmooth);
-	void SetMaxFov(int newFov);
+	void SetMaxFov(float newFov);
 	void SetAimbot(bool State);
 	void SetAimbotRCS(bool State);
 	void SetKey(int VirtualKey);
