@@ -17,7 +17,7 @@ public:
 private:
 	void DropTarget();
 	bool isGoodTarget(int iIndex);
-	void VelocityComp(fVector3& EnemyPos, fVector3 EnemyVecVelocity, fVector3 PlayerVecVelocity);
+	void VelocityComp(fVector3& EnemyPos, fVector3 EnemyVecVelocity);
 
 private:
 	int m_iTarget;
@@ -34,6 +34,23 @@ private:
 private:
 	//Features
 	bool m_bAimbot;
+	bool m_bAimbotRCS;
+
+public:
+	int GetBone();
+	int GetSmooth();
+	int GetMaxFov();
+	bool GetAimbot();
+	bool GetAimbotRCS();
+
+	void SetBone(int newBone);
+	void SetSmooth(int newSmooth);
+	void SetMaxFov(int newFov);
+	void SetAimbot(bool State);
+	void SetAimbotRCS(bool State);
+	void SetKey(int VirtualKey);
+
+
 };
 
 extern Aimbot aimbot; //global variable for using aimbot

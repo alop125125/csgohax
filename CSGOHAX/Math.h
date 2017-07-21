@@ -1,9 +1,6 @@
 #pragma once
 #include <Windows.h>
 #include <iostream>
-#include "Memory.h"
-#include "offsets.h"
-//#include "Entity.h"
 
 #define M_PI 3.141592653589793
 #define M_PI_F ((float)M_PI)

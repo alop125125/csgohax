@@ -55,3 +55,7 @@ enum ItemID : int {
 	WEAPON_KNIFE_PUSH = 516
 };
 
+enum BoneID : int
+{
+	Head = 8
+};
