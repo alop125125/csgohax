@@ -28,6 +28,12 @@ bool Engine::isIngame()
 		return false;
 }
 
+int Engine::GetState()
+{
+	int state = mem.Read<int>(ClientStateBase + off.dwClientState_State);
+	return state;
+}
+
 fVector2 Engine::GetViewAngles()
 {
 	return mem.Read<fVector2>(ClientStateBase + off.dwClientState_ViewAngles);

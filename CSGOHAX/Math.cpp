@@ -1,4 +1,6 @@
 #include "Math.h"
+#include "Entity.h"
+
 #define DEG2RAD( x  )  ( (float)(x) * (float)( M_PI_F / 180.f ) )
 #define RAD2DEG( x  )  ( (float)(x) * (float)( 180.f/M_PI_F ) )
 
@@ -13,6 +15,7 @@ Math::~Math()
 
 fVector3 Math::CalcAngle(fVector3 FirstAngle, fVector3 SecondAngle)
 {
+	
 	fVector3 AimAngles;
 	fVector3 delta = FirstAngle - SecondAngle;
 	float hyp = sqrt((delta.x * delta.x) + (delta.y * delta.y));
@@ -21,6 +24,20 @@ fVector3 Math::CalcAngle(fVector3 FirstAngle, fVector3 SecondAngle)
 	AimAngles.z = 0.0f;
 	if (delta.x >= 0.0)
 		AimAngles.y += 180.0f;
+	
+
+	if (LocalEntity.GetShotsFired() > 1)
+	{
+		fVector3 Punch = mem.Read<fVector3>(LocalEntity.GetBase() + off.m_aimPunchAngle);
+		fVector2 Fin;
+
+		Fin.x = Punch.x * 1.98f;
+		Fin.y = Punch.y * 1.98f;
+		
+		AimAngles.x -= Fin.x;
+		AimAngles.y -= Fin.y + 0.04f;
+	}
+
 	fVector3 ret = ClampAngles(AimAngles);
 	return ret;
 }

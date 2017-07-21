@@ -13,6 +13,8 @@ public:
 	void setup();
 	bool isIngame();
 
+	int GetState();
+
 	fVector2 GetViewAngles();
 	
 

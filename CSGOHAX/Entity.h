@@ -13,6 +13,8 @@ public:
 
 	bool Update(int iIndex);
 
+	DWORD GetBase();
+
 	fVector3 GetOrigin();
 	fVector3 GetVelocity();
 	fVector3 GetEyePos();
@@ -23,6 +25,7 @@ public:
 	int GetFlags();
 	int GetCrosshairId();
 	int GetActiveWeapon();
+	int GetShotsFired();
 	//TODO bool isActiveWeaponPistol
 
 
@@ -51,6 +54,7 @@ private:
 	int m_iFlags;
 	int m_iCrosshairID;
 	int m_iWeaponId;
+	int m_iShotsFired;
 
 	int m_iCompetitiveRanking;
 	int m_iCompetitiveWins;

@@ -53,6 +53,17 @@ bool Entity::Update(int iIndex)//CURRENTLY RETURNED FALSE AFTER JOINING NEW GAME
 	return true;
 }
 
+DWORD Entity::GetBase()
+{
+	return Ent;
+}
+
+int Entity::GetShotsFired()
+{
+	m_iShotsFired = mem.Read<int>(Ent + off.m_iShotsFired);
+	return m_iShotsFired;
+}
+
 fVector3 Entity::GetOrigin()
 {
 	m_vOrigin = mem.Read<fVector3>(Ent + off.m_vecOrigin);

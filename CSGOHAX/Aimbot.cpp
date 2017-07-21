@@ -6,16 +6,24 @@ using namespace std;
 Aimbot aimbot;
 
 
+#define LEFTCLICK 0x1
+#define LEFTALT 0x12
+
 //TODO add get set functions for these
 Aimbot::Aimbot()
 {
 	//init values
 	m_iTarget = -1;
 	m_flBest = 999999.0f;
-	m_bAimbot = true;
+
+
+	m_iVirualKey = LEFTALT;
 	m_iSmooth = 75;
-	m_iBone = 8;
-	m_iVirualKey = 0x12;
+	m_iBone = 8;	
+	m_flMaxFov = 75.0f;
+
+
+	m_bAimbot = true;
 }
 
 
@@ -32,7 +40,7 @@ void Aimbot::FindTarget()
 
 	for (int i = 0; i < 65; i++)
 	{
-		if (EntityList[i].isValid() && LocalEntity.GetTeam() != EntityList[i].GetTeam()) //make sure valid
+		if (isGoodTarget(i)) //make sure valid and in fov
 		{
 			if (m_bAimbot) //if on
 			{
@@ -50,6 +58,17 @@ void Aimbot::FindTarget()
 	}
 }
 
+bool Aimbot::isGoodTarget(int iIndex)
+{
+	if (!EntityList[iIndex].isValid())
+		return false;
+	if (EntityList[iIndex].GetTeam() == LocalEntity.GetTeam())
+		return false;
+	if (Math::GetFov(Math::V2toV3(engine.GetViewAngles()), LocalEntity.GetEyePos(), EntityList[iIndex].GetBonePos(m_iBone)) > m_flMaxFov)
+		return false;
+	return true;
+}
+
 void Aimbot::GotoTarget()
 {
 	//check if pressing key and its on
@@ -59,12 +78,15 @@ void Aimbot::GotoTarget()
 		if (m_iTarget == -1)
 			return;
 		
+		
 		Entity Ent = EntityList[m_iTarget]; //convienence 
 
 		//get necessary information
 		fVector3 EnemyPos = Ent.GetBonePos(m_iBone);
 		fVector3 LocalPos = LocalEntity.GetEyePos();
 		
+		VelocityComp(EnemyPos, Ent.GetVelocity(), LocalEntity.GetVelocity());
+
 		//calculate vector between me and enemy
 		fVector3 Calcd = Math::CalcAngle(LocalPos, EnemyPos);
 		
@@ -76,6 +98,17 @@ void Aimbot::GotoTarget()
 		}
 	}
 	
+}
+
+void Aimbot::ApplyRcsToAimAngle(fVector3* pAngle)//TODO finsih
+{
+
+}
+
+void Aimbot::VelocityComp(fVector3& EnemyPos, fVector3 EnemyVecVelocity, fVector3 PlayerVecVelocity)
+{
+	EnemyPos = EnemyPos + (EnemyVecVelocity * 0.045f);
+	EnemyPos = EnemyPos - (EnemyVecVelocity * 0.045f);
 }
 
 //resets values

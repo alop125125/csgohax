@@ -39,6 +39,8 @@ void Update()
 	{
 		if (!engine.isIngame())
 			continue;
+		
+		LocalEntity.Update(INDEX_LOCAL);
 
 		//update enitities
 		for (int i = 0; i < 65; i++)
@@ -58,7 +60,8 @@ void AimbotLoop()
 		if (engine.isIngame())
 		{
 			aimbot.FindTarget();
-			aimbot.GotoTarget();		
+			aimbot.GotoTarget();	
+			this_thread::sleep_for(chrono::milliseconds(1));
 		}
 		this_thread::sleep_for(chrono::milliseconds(1));
 	}
@@ -70,7 +73,7 @@ int main()
 	//attach csgo.exe
 	if (!mem.AttachProcess("csgo.exe"))
 		return false;
-	
+
 	//find needed info
 	DWORD ClientDll = mem.FindModuleBase("client.dll");
 	DWORD EngineDLL = mem.FindModuleBase("engine.dll");
@@ -84,9 +87,7 @@ int main()
 		Sleep(1);
 	}
 
-	//update localentity (urself)
-	if (!LocalEntity.Update(INDEX_LOCAL))
-		return false;
+	
 
 	//run threads
 	thread tUpdate(Update);
@@ -94,6 +95,12 @@ int main()
 	thread tAimbot(AimbotLoop);
 	tAimbot.detach();
 	
-	for (;;) { Sleep(10000); } //keep it running
+	//keep it running and test new stuff
+	for (;;)
+	{
+		if (GetAsyncKeyState(VK_INSERT))
+			cout << engine.GetViewAngles() << endl;
+		Sleep(100); 
+	}
 	
 }
