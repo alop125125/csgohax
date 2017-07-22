@@ -6,6 +6,7 @@
 #include "Entity.h"
 #include "Aimbot.h"
 #include <thread>
+#include "GUI.h"
 
 //------------------------------------------------------------------------
 //-------------- _____ ------------------------------- _____ -------------
@@ -52,6 +53,13 @@ void Update()
 	}
 }
 
+//runs GUI
+void GUILoop()
+{
+	g_pGui->Init();
+	g_pGui->Run();
+}
+
 //runs aimbot
 void AimbotLoop()
 {
@@ -94,13 +102,9 @@ int main()
 	tUpdate.detach();
 	thread tAimbot(AimbotLoop);
 	tAimbot.detach();
+	thread tGUI(GUILoop);
+	tGUI.join();
 	
-	//keep it running and test new stuff
-	for (;;)
-	{
-		if (GetAsyncKeyState(VK_INSERT))
-			cout << engine.GetViewAngles() << endl;
-		Sleep(100); 
-	}
 	
+	return 0;
 }
