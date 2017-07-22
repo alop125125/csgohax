@@ -10,8 +10,8 @@ public:
 	//public member functions
 	Memory();
 	~Memory();
-	bool AttachProcess(const char* name);
-	DWORD FindModuleBase(const char* name);
+	bool AttachProcess(const wchar_t* name);
+	DWORD FindModuleBase(const wchar_t* name);
 
 	DWORD GetClient();
 	DWORD GetEngine();

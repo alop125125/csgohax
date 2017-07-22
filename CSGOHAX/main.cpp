@@ -71,12 +71,12 @@ void AimbotLoop()
 int main()
 {
 	//attach csgo.exe
-	if (!mem.AttachProcess("csgo.exe"))
+	if (!mem.AttachProcess(L"csgo.exe"))
 		return false;
 
 	//find needed info
-	DWORD ClientDll = mem.FindModuleBase("client.dll");
-	DWORD EngineDLL = mem.FindModuleBase("engine.dll");
+	DWORD ClientDll = mem.FindModuleBase(L"client.dll");
+	DWORD EngineDLL = mem.FindModuleBase(L"engine.dll");
 
 	//setup engine
 	engine.setup();

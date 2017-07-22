@@ -26,7 +26,7 @@ DWORD Memory::GetEngine()
 }
 
 //stores a handle to the process
-bool Memory::AttachProcess(const char* name)
+bool Memory::AttachProcess(const wchar_t* name)
 {
 	//get snapshot of processes
 	HANDLE hPID = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, NULL);
@@ -36,7 +36,7 @@ bool Memory::AttachProcess(const char* name)
 	//while the current process is not name
 	do
 		{ 	
-			if (!strcmp(ProcEntry.szExeFile, name))
+			if (!wcscmp(ProcEntry.szExeFile, name))
 			{
 				m_dwProcID = ProcEntry.th32ProcessID; //set proc id
 				CloseHandle(hPID); //close handle
@@ -50,7 +50,7 @@ bool Memory::AttachProcess(const char* name)
 }
 
 //finds the base address of the module specified in the name paramater
-DWORD Memory::FindModuleBase(const char* name)
+DWORD Memory::FindModuleBase(const wchar_t* name)
 {
 	//take snapshot of m_dwProcID's modules
 	HANDLE hMID = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, m_dwProcID);
@@ -60,16 +60,17 @@ DWORD Memory::FindModuleBase(const char* name)
 	//loop till module is equal to name
 	do
 	{	
-		if (!strcmp(ModEntry.szModule, name))
+		if (!wcscmp(ModEntry.szModule, name))
 		{
 
 			//Please dont do this just dont
-			if (!strcmp(ModEntry.szModule, "client.dll"))
+			if (!wcscmp(ModEntry.szModule, L"client.dll"))
 			{
 				ClientBase = (DWORD)ModEntry.modBaseAddr;
 			}
-			if (!strcmp(ModEntry.szModule, "engine.dll"))
+			if (!wcscmp(ModEntry.szModule, L"engine.dll"))
 			{
+				
 				EngineBase = (DWORD)ModEntry.modBaseAddr;
 			}
 
@@ -80,6 +81,6 @@ DWORD Memory::FindModuleBase(const char* name)
 	} while (Module32Next(hMID, &ModEntry));
 	
 	//if it goes through all and never finds it exit and give message box
-	MessageBox(NULL, "Module Not Found", "Error", MB_OK);
+	MessageBox(NULL, L"Module Not Found", L"Error", MB_OK);
 	exit(1);
 }
