@@ -46,6 +46,8 @@ GUI::GUI()
 	width = 400;
 	height = 400;
 	clear_col = ImColor(75, 25, 12);
+
+	m_bAimbot = aimbot.GetAimbot();
 }
 
 
@@ -135,12 +137,29 @@ void GUI::HandleGUI()
 
 	ImGui::Begin("Main Menu", 0, wndFlags);
 
+	ImGui::TextColored(ImColor(100, 80, 255), "Welcome To Shitty Cheat");
+	ImGui::SameLine((float)width - 40);
 	if (ImGui::Button("Exit"))
 		PostQuitMessage(0);
 
+
+	//bool yes = 1;
+	//ImGui::ShowTestWindow(&yes);
+
+	if (ImGui::CollapsingHeader("Aimbot"))
+	{
+		AimbotGUI();
+	}
+	
 	ImGui::End();
 
 	EndGUI();
+}
+
+void GUI::AimbotGUI()
+{
+	ImGui::Checkbox("Aimbot##AimbotState", &m_bAimbot);
+	aimbot.SetAimbot(m_bAimbot);
 }
 
 void GUI::EndGUI()

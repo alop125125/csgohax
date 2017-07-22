@@ -5,6 +5,7 @@
 #define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
 #include <tchar.h>
+#include "Aimbot.h"
 
 class GUI
 {
@@ -21,6 +22,12 @@ private:
 	bool InitD3D();
 	void HandleGUI();
 	void EndGUI();
+
+private:
+	void AimbotGUI();
+
+private:
+	bool m_bAimbot;
 
 private:
 	const wchar_t* CLASS_NAME = _T("Basic Class");
