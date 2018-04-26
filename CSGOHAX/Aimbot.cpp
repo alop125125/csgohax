@@ -17,14 +17,16 @@ Aimbot::Aimbot()
 	m_iTarget = -1;
 	m_flBest = 999999.0f;
 
-
+	//settings
 	m_iVirualKey = LEFTALT;
-	m_iSmooth = 75;
-	m_iBone = BoneID::Head;	
+	m_iSmooth = 55;
+	m_iBone = BoneID::Head;
 	m_flMaxFov = 75.0f;
 
+	// features/settings
 	m_bAimbotRCS = true;
 	m_bAimbot = true;
+	m_flRCSAmount = 2.0f;
 }
 
 
@@ -65,6 +67,7 @@ void Aimbot::GotoTarget()
 	//while loop instead of for to keep from flickering and not insta locking next target
 	while (GetAsyncKeyState(m_iVirualKey) & 0x8000 && m_bAimbot)
 	{
+		
 		if (m_iTarget == -1)
 			return;
 
@@ -124,8 +127,8 @@ void Aimbot::ApplyRcsToAimAngle(fVector3* pAngle)
 		fVector3 Punch = mem.Read<fVector3>(LocalEntity.GetBase() + off.m_aimPunchAngle);
 		fVector2 Fin;
 
-		Fin.x = Punch.x * 1.99f;
-		Fin.y = Punch.y * 1.99f;
+		Fin.x = Punch.x * m_flRCSAmount;
+		Fin.y = Punch.y * m_flRCSAmount;
 
 		pAngle->x -= Fin.x;
 		pAngle->y -= Fin.y + 0.04f;
@@ -134,6 +137,12 @@ void Aimbot::ApplyRcsToAimAngle(fVector3* pAngle)
 #pragma endregion
 
 #pragma region Set/Get
+
+float Aimbot::GetRCSAmount()
+{
+	return m_flRCSAmount;
+}
+
 int Aimbot::GetBone()
 {
 	return m_iBone;
@@ -157,6 +166,11 @@ bool Aimbot::GetAimbot()
 bool Aimbot::GetAimbotRCS()
 {
 	return m_bAimbotRCS;
+}
+
+void Aimbot::SetRCSAmount(float newAmount)
+{
+	m_flRCSAmount = newAmount;
 }
 
 void Aimbot::SetBone(int newBone)

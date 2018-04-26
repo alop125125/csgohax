@@ -16,7 +16,6 @@ Math::~Math()
 
 fVector3 Math::CalcAngle(fVector3 FirstAngle, fVector3 SecondAngle)
 {
-	
 	fVector3 AimAngles;
 	fVector3 delta = FirstAngle - SecondAngle;
 	float hyp = sqrt((delta.x * delta.x) + (delta.y * delta.y));

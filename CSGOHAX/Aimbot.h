@@ -23,6 +23,8 @@ private:
 	int m_iTarget;
 	float m_flBest;
 
+
+public:
 	//Settings
 	int m_iVirualKey;
 	
@@ -30,8 +32,8 @@ private:
 	int m_iSmooth;
 	
 	float m_flMaxFov;
-
-private:
+	float m_flRCSAmount;
+public:
 	//Features
 	bool m_bAimbot;
 	bool m_bAimbotRCS;
@@ -40,9 +42,11 @@ public:
 	int GetBone();
 	int GetSmooth();
 	float GetMaxFov();
+	float GetRCSAmount();
 	bool GetAimbot();
 	bool GetAimbotRCS();
 
+	void SetRCSAmount(float newAmount);
 	void SetBone(int newBone);
 	void SetSmooth(int newSmooth);
 	void SetMaxFov(float newFov);

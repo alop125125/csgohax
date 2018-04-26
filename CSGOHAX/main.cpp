@@ -6,18 +6,8 @@
 #include "Entity.h"
 #include "Aimbot.h"
 #include <thread>
-#include "GUI.h"
+#include "UI.h"
 
-//------------------------------------------------------------------------
-//-------------- _____ ------------------------------- _____ -------------
-//--------------|  ___|-------------------------------|  ___|-------------
-//--------------| |__   ___   ___   __ _  _ __    ___ | |__  -------------
-//--------------|  __| / __| / __| / _` || '_ \  / _ \|  __| -------------
-//--------------| |___ \__ \| (__ | (_| || |_) ||  __/| |___ -------------
-//--------------\____/ |___/ \___| \__,_|| .__/  \___|\____/--------------
-//---------------------------------------| |------------------------------
-//---------------------------------------|_|------------------------------            
-//------------------------------------------------------------------------
 
 using namespace std;
 
@@ -36,7 +26,7 @@ ostream& operator<<(ostream& os, const fVector3& vec)
 //every second updates
 void Update()
 {
-	for (;;)
+	while(true)
 	{
 		if (!engine.isIngame())
 			continue;
@@ -56,8 +46,34 @@ void Update()
 //runs GUI
 void GUILoop()
 {
-	g_pGui->Init();
-	g_pGui->Run();
+	while (!engine.isIngame())
+		Sleep(100);
+	this_thread::sleep_for(chrono::milliseconds(500));
+	ui->draw();
+	while (true)
+	{
+
+		if (GetAsyncKeyState(0x26))//up
+		{
+			ui->Selection_UP();
+		}
+
+		if (GetAsyncKeyState(0x28))//down
+		{
+			ui->Selection_DOWN();
+		}
+
+		if (GetAsyncKeyState(0x25))//left
+		{
+			ui->Selection_LEFT();
+		}
+
+		if (GetAsyncKeyState(0x27))//right
+		{
+			ui->Selection_RIGHT();
+		}
+		this_thread::sleep_for(chrono::milliseconds(78));
+	}
 }
 
 //runs aimbot
@@ -81,29 +97,31 @@ int main()
 	//attach csgo.exe
 	if (!mem.AttachProcess(L"csgo.exe"))
 		return false;
-
+	
 	//find needed info
 	DWORD ClientDll = mem.FindModuleBase(L"client.dll");
 	DWORD EngineDLL = mem.FindModuleBase(L"engine.dll");
-
+	
 	//setup engine
 	engine.setup();
-
+	
 	//if not in game loop till you are 
 	while (!engine.isIngame())
 	{
 		Sleep(1);
 	}
-
 	
-
+	
+	
+	
 	//run threads
+	thread tGUI(GUILoop);
+	tGUI.detach();
 	thread tUpdate(Update);
 	tUpdate.detach();
 	thread tAimbot(AimbotLoop);
 	tAimbot.detach();
-	thread tGUI(GUILoop);
-	tGUI.join();
+	for (;;) { Sleep(1000); }
 	
 	
 	return 0;
